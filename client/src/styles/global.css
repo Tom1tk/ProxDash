@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Sora:wght@400;600;700&display=swap');
+
+:root {
+  --background: #080b10;
+  --card: rgba(255,255,255,0.03);
+  --border: rgba(255,255,255,0.07);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255,255,255,0.4);
+  --text-muted: rgba(255,255,255,0.15);
+  --status-running: #00ff88;
+  --status-stopped: #ff4466;
+  --status-warning: #ffaa00;
+  --accent-blue: #00aaff;
+  --accent-purple: #aa44ff;
+  --accent-orange: #ffaa00;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--background);
+  font-family: 'Sora', sans-serif;
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}
+
+button {
+  font-family: inherit;
+}
