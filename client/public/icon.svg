@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#080b10"/>
+  <circle cx="390" cy="120" r="200" fill="rgba(0,170,255,0.08)" />
+  <circle cx="120" cy="400" r="180" fill="rgba(170,68,255,0.06)" />
+  <!-- Background arcs -->
+  <path d="M 156.5 376.5 A 150 150 0 1 1 355.5 376.5" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="28" stroke-linecap="round"/>
+  <path d="M 187.2 348.7 A 105 105 0 1 1 324.8 348.7" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="28" stroke-linecap="round"/>
+  <path d="M 218 320.9 A 60 60 0 1 1 294 320.9" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="28" stroke-linecap="round"/>
+  <!-- CPU arc (blue, 70%) -->
+  <path d="M 156.5 376.5 A 150 150 0 1 1 336 172" fill="none" stroke="#00aaff" stroke-width="28" stroke-linecap="round" filter="url(#glow-blue)"/>
+  <!-- MEM arc (purple, 55%) -->
+  <path d="M 187.2 348.7 A 105 105 0 1 1 183 199" fill="none" stroke="#aa44ff" stroke-width="28" stroke-linecap="round" filter="url(#glow-purple)"/>
+  <!-- DISK arc (orange, 35%) -->
+  <path d="M 218 320.9 A 60 60 0 0 1 204.5 237" fill="none" stroke="#ffaa00" stroke-width="28" stroke-linecap="round" filter="url(#glow-orange)"/>
+  <!-- Status dot -->
+  <circle cx="256" cy="358" r="14" fill="#00ff88"/>
+  <defs>
+    <filter id="glow-blue"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#00aaff" flood-opacity="0.6"/></filter>
+    <filter id="glow-purple"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#aa44ff" flood-opacity="0.6"/></filter>
+    <filter id="glow-orange"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#ffaa00" flood-opacity="0.6"/></filter>
+  </defs>
+</svg>

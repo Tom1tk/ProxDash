@@ -89,7 +89,7 @@ export default function VMCard({ vm, onAction, onConsole }) {
             <button onClick={() => handleAction("stop")} disabled={!!loading} style={btnStyle("#ff4466", loading === "stop")}>
               {loading === "stop" ? "···" : "■ Stop"}
             </button>
-            <button onClick={() => onConsole(vm)} style={btnStyle("#00aaff", false)}>
+            <button onClick={() => onConsole(vm, 'console')} style={btnStyle("#00aaff", false)}>
               ⌨ Console
             </button>
           </>

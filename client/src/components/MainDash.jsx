@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { getNode, getContainers, getVMs, containerAction, vmAction } from '../api'
 import { usePolling, usePageVisibility } from '../hooks/usePolling'
 import { useToast } from '../hooks/useToast'
+import { defaultSettings } from '../defaults'
 import Header from './Header'
 import NodeStats from './NodeStats'
 import ContainerCard from './ContainerCard'
@@ -21,12 +22,6 @@ const mockContainers = [
   { id: 103, name: "web-tracker", type: "lxc", status: "stopped", cpu: 0, mem: 0 },
   { id: 104, name: "pihole", type: "lxc", status: "running", cpu: 2, mem: 6 },
 ]
-
-const defaultSettings = {
-  cpuWarnThreshold: 80,
-  memWarnThreshold: 85,
-  diskWarnThreshold: 90,
-}
 
 export default function MainDash() {
   const [node, setNode] = useState(null)
@@ -140,7 +135,7 @@ export default function MainDash() {
             <Header node={node} running={running} total={total} now={now} />
             <div style={{ padding: "16px 16px 90px" }}>
               <NodeStats node={node} />
-              
+
               <div style={{ display: "flex", gap: 6, marginBottom: 14, background: "rgba(255,255,255,0.03)", borderRadius: 10, padding: 4 }}>
                 <button onClick={() => setTab('containers')} style={{
                   flex: 1, padding: "8px 0", borderRadius: 7, border: "none", cursor: "pointer",
@@ -189,14 +184,14 @@ export default function MainDash() {
 
         {terminalTarget && <Terminal target={terminalTarget} onClose={() => setTerminalTarget(null)} />}
         {confirm && (
-          <ConfirmModal 
+          <ConfirmModal
             title={`${confirm.action === 'stop' ? 'Stop' : 'Shutdown'} ${confirm.ct.name}?`}
             message={`This will ${confirm.action === 'stop' ? 'force stop' : 'gracefully shut down'} the container.`}
             onConfirm={confirmAction}
             onCancel={() => setConfirm(null)}
           />
         )}
-        {toast && <Toast msg={toast} onDone={() => {}} />}
+        {toast && <Toast msg={toast} onDone={() => { }} />}
       </div>
     </>
   )

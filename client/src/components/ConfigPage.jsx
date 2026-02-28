@@ -1,13 +1,5 @@
 import { useState, useEffect } from 'react'
-
-const defaultSettings = {
-  cpuWarnThreshold: 80,
-  memWarnThreshold: 85,
-  diskWarnThreshold: 90,
-  pollInterval: 5,
-  confirmStop: true,
-  confirmShutdown: true,
-}
+import { defaultSettings } from '../defaults'
 
 export default function ConfigPage({ settings: propSettings, onSave }) {
   const [settings, setSettings] = useState(() => {
@@ -34,12 +26,12 @@ export default function ConfigPage({ settings: propSettings, onSave }) {
   return (
     <div style={{ padding: '16px', paddingBottom: 90 }}>
       <h2 style={{ color: '#fff', fontSize: 18, fontWeight: 600, marginBottom: 16 }}>Settings</h2>
-      
+
       <div style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 14, padding: '4px 16px' }}>
         <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: 10, fontFamily: "'JetBrains Mono', monospace", padding: '12px 0 8px', textTransform: 'uppercase', letterSpacing: 1 }}>Alert Thresholds</div>
-        
+
         <Row label="CPU Warning (%)">
-          <input type="range" min="50" max="100" value={settings.cpuWarnThreshold} 
+          <input type="range" min="50" max="100" value={settings.cpuWarnThreshold}
             onChange={e => update('cpuWarnThreshold', parseInt(e.target.value))}
             style={{ width: 100 }} />
           <span style={{ color: '#fff', fontSize: 12, marginLeft: 8, fontFamily: 'JetBrains Mono', width: 30, textAlign: 'right' }}>{settings.cpuWarnThreshold}</span>
@@ -62,7 +54,7 @@ export default function ConfigPage({ settings: propSettings, onSave }) {
 
       <div style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 14, padding: '4px 16px', marginTop: 16 }}>
         <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: 10, fontFamily: "'JetBrains Mono', monospace", padding: '12px 0 8px', textTransform: 'uppercase', letterSpacing: 1 }}>Behavior</div>
-        
+
         <Row label="Poll Interval (seconds)">
           <input type="number" min="1" max="60" value={settings.pollInterval}
             onChange={e => update('pollInterval', parseInt(e.target.value))}

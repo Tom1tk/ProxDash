@@ -1,17 +1,12 @@
 import { useState, useEffect } from 'react'
-
-const defaultSettings = {
-  cpuWarnThreshold: 80,
-  memWarnThreshold: 85,
-  diskWarnThreshold: 90,
-}
+import { defaultSettings } from '../defaults'
 
 export default function AlertsPage({ node, containers, vms, settings = defaultSettings }) {
   const [alerts, setAlerts] = useState([])
 
   useEffect(() => {
     const newAlerts = []
-    
+
     if (node) {
       if (node.cpu > settings.cpuWarnThreshold) {
         newAlerts.push({ level: 'warn', resource: node.name, metric: 'CPU', value: node.cpu })
@@ -41,14 +36,14 @@ export default function AlertsPage({ node, containers, vms, settings = defaultSe
   return (
     <div style={{ padding: '16px', paddingBottom: 90 }}>
       <h2 style={{ color: '#fff', fontSize: 18, fontWeight: 600, marginBottom: 16 }}>Alerts</h2>
-      
+
       {alerts.length === 0 ? (
-        <div style={{ 
-          background: 'rgba(255,255,255,0.025)', 
-          border: '1px solid rgba(255,255,255,0.06)', 
-          borderRadius: 14, 
-          padding: 40, 
-          textAlign: 'center' 
+        <div style={{
+          background: 'rgba(255,255,255,0.025)',
+          border: '1px solid rgba(255,255,255,0.06)',
+          borderRadius: 14,
+          padding: 40,
+          textAlign: 'center'
         }}>
           <div style={{ fontSize: 32, marginBottom: 10 }}>✅</div>
           <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: 13, fontFamily: "'JetBrains Mono', monospace" }}>All systems normal</div>
