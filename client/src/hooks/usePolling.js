@@ -4,12 +4,15 @@ export function usePolling(callback, interval = 5000, active = true) {
   const cbRef = useRef(callback)
   useEffect(() => { cbRef.current = callback }, [callback])
 
+  // Guard against NaN/invalid intervals (e.g. undefined * 1000)
+  const safeInterval = (!interval || isNaN(interval) || interval < 1000) ? 5000 : interval
+
   useEffect(() => {
     if (!active) return
     cbRef.current()
-    const id = setInterval(() => cbRef.current(), interval)
+    const id = setInterval(() => cbRef.current(), safeInterval)
     return () => clearInterval(id)
-  }, [interval, active])
+  }, [safeInterval, active])
 }
 
 export function usePageVisibility(callback) {

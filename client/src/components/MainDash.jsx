@@ -34,7 +34,7 @@ export default function MainDash() {
   const [confirm, setConfirm] = useState(null)
   const [settings, setSettings] = useState(() => {
     const saved = localStorage.getItem('proxdash_settings')
-    return saved ? JSON.parse(saved) : defaultSettings
+    return saved ? { ...defaultSettings, ...JSON.parse(saved) } : defaultSettings
   })
 
   const { toast, showToast } = useToast()

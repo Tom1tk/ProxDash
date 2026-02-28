@@ -4,7 +4,7 @@ import { defaultSettings } from '../defaults'
 export default function ConfigPage({ settings: propSettings, onSave }) {
   const [settings, setSettings] = useState(() => {
     const saved = localStorage.getItem('proxdash_settings')
-    return saved ? JSON.parse(saved) : defaultSettings
+    return saved ? { ...defaultSettings, ...JSON.parse(saved) } : defaultSettings
   })
 
   useEffect(() => {
