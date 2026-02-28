@@ -89,7 +89,7 @@ export default function ContainerCard({ ct, onAction, onConsole }) {
             <button onClick={() => handleAction("stop")} disabled={!!loading} style={btnStyle("#ff4466", loading === "stop")}>
               {loading === "stop" ? "···" : "■ Stop"}
             </button>
-            <button onClick={() => onConsole(ct)} style={btnStyle("#00aaff", false)}>
+            <button onClick={() => onConsole(ct, 'console')} style={btnStyle("#00aaff", false)}>
               ⌨ Console
             </button>
           </>

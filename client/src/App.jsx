@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { login, checkAuth } from './api'
+import MainDash from './components/MainDash'
 
 export default function App() {
   const [authed, setAuthed] = useState(false)
@@ -55,5 +56,3 @@ export default function App() {
 
   return <MainDash />
 }
-
-import MainDash from './components/MainDash'

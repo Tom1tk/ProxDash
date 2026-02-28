@@ -2,6 +2,8 @@ import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
 import { createServer } from 'http'
+import { fileURLToPath } from 'url'
+import { dirname, join } from 'path'
 import { setupWebSocket } from './routes/terminal.js'
 import nodesRouter from './routes/nodes.js'
 import containersRouter from './routes/containers.js'
@@ -9,6 +11,8 @@ import vmsRouter from './routes/vms.js'
 import statsRouter from './routes/stats.js'
 import { pinAuth, pinLogin } from './lib/auth.js'
 import 'dotenv/config'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const app = express()
 const server = createServer(app)
@@ -26,8 +30,8 @@ app.use('/api/containers', containersRouter)
 app.use('/api/vms', vmsRouter)
 app.use('/api/stats', statsRouter)
 
-app.use(express.static('../client/dist'))
-app.get('*', (req, res) => res.sendFile('../client/dist/index.html'))
+app.use(express.static(join(__dirname, '../client/dist')))
+app.get('*', (req, res) => res.sendFile(join(__dirname, '../client/dist/index.html')))
 
 setupWebSocket(server)
 

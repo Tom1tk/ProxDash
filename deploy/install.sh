@@ -10,7 +10,7 @@ npm install -g pm2
 
 echo "==> Cloning ProxDash"
 cd /opt
-git clone https://github.com/YOUR_USERNAME/proxdash.git
+git clone https://github.com/Tom1tk/ProxDash.git proxdash
 cd proxdash
 
 echo "==> Installing server dependencies"
