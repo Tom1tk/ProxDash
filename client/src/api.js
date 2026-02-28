@@ -7,53 +7,46 @@ function headers() {
   }
 }
 
-export async function getNode() {
-  const r = await fetch(`${BASE}/nodes`, { headers: headers() })
+async function fetchJSON(url, options = {}) {
+  const r = await fetch(url, { headers: headers(), ...options })
   if (r.status === 401) throw new Error('UNAUTHORIZED')
+  if (!r.ok) {
+    const body = await r.json().catch(() => ({}))
+    throw new Error(body.error || `HTTP ${r.status}`)
+  }
   return r.json()
+}
+
+export async function getNode() {
+  return fetchJSON(`${BASE}/nodes`)
 }
 
 export async function getContainers() {
-  const r = await fetch(`${BASE}/containers`, { headers: headers() })
-  if (r.status === 401) throw new Error('UNAUTHORIZED')
-  return r.json()
+  return fetchJSON(`${BASE}/containers`)
 }
 
 export async function getVMs() {
-  const r = await fetch(`${BASE}/vms`, { headers: headers() })
-  if (r.status === 401) throw new Error('UNAUTHORIZED')
-  return r.json()
+  return fetchJSON(`${BASE}/vms`)
 }
 
 export async function containerAction(vmid, action) {
-  const r = await fetch(`${BASE}/containers/${vmid}/${action}`, {
-    method: 'POST',
-    headers: headers(),
-  })
-  return r.json()
+  return fetchJSON(`${BASE}/containers/${vmid}/${action}`, { method: 'POST' })
 }
 
 export async function vmAction(vmid, action) {
-  const r = await fetch(`${BASE}/vms/${vmid}/${action}`, {
-    method: 'POST',
-    headers: headers(),
-  })
-  return r.json()
+  return fetchJSON(`${BASE}/vms/${vmid}/${action}`, { method: 'POST' })
 }
 
 export async function getNodeStats(timeframe = 'hour') {
-  const r = await fetch(`${BASE}/stats/node?timeframe=${timeframe}`, { headers: headers() })
-  return r.json()
+  return fetchJSON(`${BASE}/stats/node?timeframe=${timeframe}`)
 }
 
 export async function getContainerStats(vmid, timeframe = 'hour') {
-  const r = await fetch(`${BASE}/stats/lxc/${vmid}?timeframe=${timeframe}`, { headers: headers() })
-  return r.json()
+  return fetchJSON(`${BASE}/stats/lxc/${vmid}?timeframe=${timeframe}`)
 }
 
 export async function getVMStats(vmid, timeframe = 'hour') {
-  const r = await fetch(`${BASE}/stats/qemu/${vmid}?timeframe=${timeframe}`, { headers: headers() })
-  return r.json()
+  return fetchJSON(`${BASE}/stats/qemu/${vmid}?timeframe=${timeframe}`)
 }
 
 export async function login(pin) {
