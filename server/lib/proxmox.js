@@ -25,7 +25,7 @@ export const NODE = process.env.PROXMOX_NODE || 'prox'
 
 export async function api(method, path, data = {}) {
   try {
-    const res = await pve({ method, url: path, data })
+    const res = await pve({ method, url: path, ...(method !== 'GET' && { data }) })
     return { data: res.data.data, error: null }
   } catch (err) {
     const status = err.response?.status
